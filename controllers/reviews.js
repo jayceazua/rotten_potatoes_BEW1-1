@@ -43,8 +43,13 @@ router.put('/:id', (req, res) => {
   })
 });
 // DELETE - Delete a review
-router.get('/:id', (req, res) => {
-
+router.delete('/:id', (req, res) => {
+  Review.findByIdAndRemove(req.params.id)
+  .then((review) => {
+    res.redirect('/');
+  }).catch((err) => {
+    res.send(err.message)
+  })
 });
 
 
