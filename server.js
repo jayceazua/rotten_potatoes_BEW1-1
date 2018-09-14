@@ -4,11 +4,9 @@ const hbs = require('express-handlebars');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// OUR MOCK ARRAY OF PROJECTS
-let reviews = [
-  { title: "Great Review" },
-  { title: "Next Review" }
-]
+// MongoDB
+require('./database/mongoDB-connection');
+const Review = require('./models/review')
 
 let newReview = { title: "Another one." }
 // Template Engine setup
@@ -23,9 +21,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // INDEX - See all reviews
 app.get('/', (req, res) => {
-  reviews.push(newReview)
-  res.render('reviews/index', {reviews});
-})
+  Review.find({}).then((reviewsData) => {
+    res.render('reviews/index', {reviewsData});
+  }).catch((err) => {
+      res.send(err.message);
+  });
+});
 
 // ROUTES - Reviews
 const reviews = require('./controllers/reviews');
