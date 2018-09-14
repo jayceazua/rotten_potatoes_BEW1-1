@@ -15,10 +15,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ROUTES
+// INDEX - See all reviews
 app.get('/', (req, res) => {
-  res.render('home', { msg: 'Whisky Tango Fox'})
+  res.render('reviews/index', {reviews});
 })
+
+// ROUTES - Reviews
+const reviews = require('./controllers/reviews');
+app.use('/reviews', reviews);
 
 
 module.exports = app.listen(port, () => {
