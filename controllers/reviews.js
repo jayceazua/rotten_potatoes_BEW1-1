@@ -1,11 +1,5 @@
 const router = require('express').Router();
 
-// OUR MOCK ARRAY OF PROJECTS
-let reviews = [
-  { title: "Great Review" },
-  { title: "Next Review" }
-]
-
 
 // INDEX - See all reviews
 // REVIEW: server.js file

@@ -4,7 +4,13 @@ const hbs = require('express-handlebars');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// OUR MOCK ARRAY OF PROJECTS
+let reviews = [
+  { title: "Great Review" },
+  { title: "Next Review" }
+]
 
+let newReview = { title: "Another one." }
 // Template Engine setup
 app.engine('hbs', hbs({
   extname: 'hbs',
@@ -17,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // INDEX - See all reviews
 app.get('/', (req, res) => {
+  reviews.push(newReview)
   res.render('reviews/index', {reviews});
 })
 
