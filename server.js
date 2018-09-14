@@ -1,12 +1,13 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB
 require('./database/mongoDB-connection');
-const Review = require('./models/review')
+const Review = require('./models/review');
 
 let newReview = { title: "Another one." }
 // Template Engine setup
@@ -18,6 +19,11 @@ app.engine('hbs', hbs({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+// BODY-PARSER
+//Body Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // INDEX - See all reviews
 app.get('/', (req, res) => {
