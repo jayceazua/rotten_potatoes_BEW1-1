@@ -27,11 +27,20 @@ router.get('/:id', (req, res) => {
 });
 // EDIT - See an edit review form
 router.get('/:id/edit', (req, res) => {
-
+  Review.findById(req.params.id).then((review) => {
+    res.render('reviews/edit', {review});
+  }).catch((err) => {
+    res.send(err.message)
+  });
 });
 // UPDATE - Update a review
 router.put('/:id', (req, res) => {
-
+  Review.findByIdAndUpdate(req.params.id, req.body)
+  .then((review) => {
+    res.redirect(`/reviews/${review._id}`)
+  }).catch((err) => {
+    res.send(err.message)
+  })
 });
 // DELETE - Delete a review
 router.get('/:id', (req, res) => {
