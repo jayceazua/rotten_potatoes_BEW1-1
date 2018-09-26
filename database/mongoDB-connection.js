@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
  // Set a Mongoose Promise Library
 mongoose.Promise = global.Promise;
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes'
+const name = process.env.DB_NAME;
+const dbURI = process.env.MONGODB_URI || `mongodb://localhost/${name}`
 mongoose.connect(dbURI, { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
   console.log('Rotten Potatoes\' database is up!')
