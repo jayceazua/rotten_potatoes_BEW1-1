@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
  // Set a Mongoose Promise Library
 mongoose.Promise = global.Promise;
 const name = process.env.DB_NAME;
+console.log(name)
 const dbURI = process.env.MONGODB_URI || `mongodb://localhost/${name}`
 mongoose.connect(dbURI, { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
