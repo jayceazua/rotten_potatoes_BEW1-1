@@ -1,13 +1,11 @@
 const router = require('express').Router();
 const Review = require('../models/review');
 
-// INDEX - See all reviews
-// REVIEW: server.js file
-
 // NEW - See new review form
 router.get('/new', (req, res) => {
   res.render('reviews/new', {})
 });
+
 // CREATE - Create a new review
 router.post('', (req, res) => {
   Review.create(req.body).then((review) => {
@@ -17,6 +15,7 @@ router.post('', (req, res) => {
     console.log(err.message);
   });
 });
+
 // SHOW - See one review
 router.get('/:id', (req, res) => {
   Review.findById(req.params.id).then((review) => {
@@ -25,6 +24,7 @@ router.get('/:id', (req, res) => {
     res.send(err.message)
   });
 });
+
 // EDIT - See an edit review form
 router.get('/:id/edit', (req, res) => {
   Review.findById(req.params.id).then((review) => {
@@ -33,6 +33,7 @@ router.get('/:id/edit', (req, res) => {
     res.send(err.message)
   });
 });
+
 // UPDATE - Update a review
 router.put('/:id', (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body)
@@ -42,6 +43,7 @@ router.put('/:id', (req, res) => {
     res.send(err.message)
   })
 });
+
 // DELETE - Delete a review
 router.delete('/:id', (req, res) => {
   Review.findByIdAndRemove(req.params.id)
@@ -51,6 +53,5 @@ router.delete('/:id', (req, res) => {
     res.send(err.message)
   })
 });
-
 
 module.exports = router

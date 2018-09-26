@@ -51,6 +51,8 @@ const reviews = require('./controllers/reviews');
 app.use('/reviews', reviews);
 
 
-module.exports = app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Port is listening on: ${port}`);
 });
+
+module.exports = app;
