@@ -39,21 +39,21 @@ describe('Reviews', ()  => {
   // TEST CREATE
   it('Should create a new review /reviews POST', (done) => {
 
-  })
+  });
   // TEST SHOW
   it('Should show an individual review /reviews/:id GET', (done) => {
 
-  })
+  });
   // TEST EDIT
   it('Should show the individual review to update review /reviews/:id/edit GET', (done) => {
 
-  })
+  });
   // TEST UPDATE
   it('Should update the individual review /reviews/:id PUT', (done) => {
 
-  })
+  });
   // TEST DELETE
   it('Sould delete individual review /reviews/:id DETELE', (done) => {
 
-  })
+  });
 });
