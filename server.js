@@ -9,9 +9,7 @@ const port = process.env.PORT || 3000;
 
 // MongoDB
 require('./database/mongoDB-connection');
-const Review = require('./models/review');
 
-let newReview = { title: "Another one." }
 // Template Engine setup
 app.engine('hbs', hbs({
   extname: 'hbs',
@@ -37,22 +35,14 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-// INDEX - See all reviews
-app.get('/', (req, res) => {
-  Review.find({}).then((reviewsData) => {
-    res.render('reviews/index', {reviewsData});
-  }).catch((err) => {
-      res.send(err.message);
-  });
-});
 
 // ROUTES - Reviews
 const reviews = require('./controllers/reviews');
-app.use('/reviews', reviews);
+app.use(reviews);
 
 
 app.listen(port, () => {
   console.log(`Port is listening on: ${port}`);
 });
 
-module.exports = app;
+module.exports = { app };

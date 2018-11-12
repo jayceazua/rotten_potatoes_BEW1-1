@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --timeout 10000"
+    "test": "mocha test/*_test.js",
+    "test-watch": "nodemon --exec 'npm test'"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "method-override": "^3.0.0",
+    "mongodb": "^3.1.9",
     "mongoose": "^5.2.14"
   },
   "devDependencies": {

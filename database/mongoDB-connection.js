@@ -10,4 +10,5 @@ mongoose.connection.once('open', () => {
   console.log('Rotten Potatoes\' database is up!')
 });
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
+mongoose.set('useCreateIndex', true);
 // mongoose.set('debug', true);
