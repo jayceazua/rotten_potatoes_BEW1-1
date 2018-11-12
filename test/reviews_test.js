@@ -17,7 +17,9 @@ describe('Reviews: ', ()  => {
             reviews.remove();
         });
     });
+
     beforeEach(populateReviews) // populate seed data for reviews
+
     // INDEX
     it('should index ALL reviews on / GET', (done) => {
         chai.request(app)
@@ -25,7 +27,10 @@ describe('Reviews: ', ()  => {
             .then((res) => {
                 expect(res).to.have.status(200);
                 // better tests coming soon
-                console.log(res)
+                Review.find().then((reviews) => {
+                    // expect(reviews.length).to.equal(2)
+                    // console.log(reviews)
+                })
                 return done();
             })
             .catch(err => done(err));
