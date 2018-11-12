@@ -42,7 +42,28 @@ describe('Reviews: ', ()  => {
             .catch(err => done(err));
     });
     // CREATE
-    it('should create a SINGLE review on /reviews POST', (done) => {});
+    it('should create a SINGLE review on /reviews POST', (done) => {
+        const demoReview = ({
+            title: 'This is a test for the sake of testing!',
+            movieTitle: 'Don\'t watch!',
+            description: 'Well this movie sucked ass...',
+            rating: 0
+        })
+        chai.request(app)
+            .post('/reviews')
+            .send(demoReview)
+            .then((res) => {
+                expect(res).to.have.status(200); // basic test
+                expect(res).to.be.html; // basic test
+                Review.findOne({ title: demoReview.title }).then((review) => {
+                    expect(demoReview.title).to.equal(review.title);
+                    // need to find the proper way of testing redirecting
+                }).catch((err) => { console.log(err.message) });
+                expect(res).to.redirect;
+                return done();
+            })
+            .catch(err => done(err));
+    });
     // SHOW
     it('should show a SINGLE review on /reviews/<id> GET', (done) => {});
     // EDIT
