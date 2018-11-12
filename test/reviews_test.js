@@ -25,6 +25,7 @@ describe('Reviews: ', ()  => {
             .then((res) => {
                 expect(res).to.have.status(200);
                 // better tests coming soon
+                console.log(res)
                 return done();
             })
             .catch(err => done(err));
@@ -58,7 +59,7 @@ describe('Reviews: ', ()  => {
                 Review.findOne({ title: demoReview.title }).then((review) => {
                     expect(demoReview.title).to.equal(review.title);
                     // need to find the proper way of testing redirecting
-                }).catch((err) => { console.log(err.message) });
+                }).catch((err) => { console.log(err) });
                 expect(res).to.redirect;
                 return done();
             })
