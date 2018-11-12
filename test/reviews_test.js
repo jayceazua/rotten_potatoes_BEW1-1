@@ -28,9 +28,8 @@ describe('Reviews: ', ()  => {
                 expect(res).to.have.status(200);
                 // better tests coming soon
                 Review.find().then((reviews) => {
-                    // expect(reviews.length).to.equal(2)
-                    // console.log(reviews)
-                })
+                    expect(reviews.length).to.equal(2)
+                }).catch(err => err)
                 return done();
             })
             .catch(err => done(err));
@@ -54,7 +53,7 @@ describe('Reviews: ', ()  => {
             movieTitle: 'Don\'t watch!',
             description: 'Well this movie sucked ass...',
             rating: 0
-        })
+        });
         chai.request(app)
             .post('/reviews')
             .send(demoReview)
@@ -64,6 +63,7 @@ describe('Reviews: ', ()  => {
                 Review.findOne({ title: demoReview.title }).then((review) => {
                     expect(demoReview.title).to.equal(review.title);
                     // need to find the proper way of testing redirecting
+                    // console.log(res.redirects) 
                 }).catch((err) => { console.log(err) });
                 expect(res).to.redirect;
                 return done();
