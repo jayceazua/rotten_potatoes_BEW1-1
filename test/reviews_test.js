@@ -60,10 +60,10 @@ describe('Reviews: ', ()  => {
             .then((res) => {
                 expect(res).to.have.status(200); // basic test
                 expect(res).to.be.html; // basic test
-                Review.findOne({ title: demoReview.title }).then((review) => {
+                Review.findOne({ title: demoReview.title }).then((review) => { // complex test
                     expect(demoReview.title).to.equal(review.title);
                     // need to find the proper way of testing redirecting
-                    // console.log(res.redirects) 
+                    console.log(`${app.mountpath}reviews/${review._id}`)
                 }).catch((err) => { console.log(err) });
                 expect(res).to.redirect;
                 return done();
