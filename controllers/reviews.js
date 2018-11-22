@@ -4,7 +4,9 @@ const Review = require('../models/review');
 // INDEX - See all reviews
 router.get('/', (req, res) => {
   Review.find({}).then((reviewsData) => {
+      // req.body = reviewsData
     res.render('reviews/index', {reviewsData});
+
   }).catch((err) => {
       res.send(err.message);
   });
@@ -20,7 +22,7 @@ router.post('/reviews', (req, res) => {
   Review.create(req.body).then((review) => {
     res.redirect(`/reviews/${review._id}`) // Redirect to reviews/:id
   }).catch((err) => {
-    console.log(err.message);
+    res.send(err.message);
   });
 });
 

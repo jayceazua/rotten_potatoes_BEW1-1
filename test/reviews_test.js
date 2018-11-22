@@ -27,10 +27,15 @@ describe('Reviews: ', ()  => {
             .get('/')
             .then((res) => {
                 expect(res).to.have.status(200);
+                expect(res).to.have.header('content-type', "text/html; charset=utf-8");
                 // better tests coming soon
-                Review.find().then((reviews) => {
-                    expect(reviews.length).to.equal(2);
-                }).catch(e => e);
+                Review.find({}).then((_reviews) => { // confirming data is in !
+                    expect(res.text).to.include(_reviews[0]._id)
+                    expect(res.text).to.include(_reviews[0].title)
+                    expect(res.text).to.include(_reviews[1]._id)
+                    expect(res.text).to.include(_reviews[1].title)
+                }).catch(e => e)
+
                 return done();
             })
             .catch(e => done(e));
@@ -68,7 +73,7 @@ describe('Reviews: ', ()  => {
                     expect(res.redirects[0]).to.include(review._id); // makes sure the redirect url includes the Id
                     expect(res.req.path).to.not.equal(`${app.mountpath}`); // makes sure it redirected
                 }).catch(e => e);
-                expect(res).to.redirect;
+                // console.log(res.body)
                 return done();
             })
             .catch(e => done(e));
@@ -128,7 +133,7 @@ describe('Reviews: ', ()  => {
                     expect(res).to.redirect;
                     expect(res.redirects[0]).to.include(data[0]._id); // makes sure the redirect url includes the Id
                     expect(res.req.path).to.not.equal(`${app.mountpath}`); // makes sure it redirected
-                    // console.log(res.res._events.data[0]())
+
                     return done()
                 })
                 .catch(e => done(e));
