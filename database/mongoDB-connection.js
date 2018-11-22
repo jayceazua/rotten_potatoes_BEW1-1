@@ -13,3 +13,9 @@ mongoose.connection.once('open', () => {
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 mongoose.set('useCreateIndex', true);
 // mongoose.set('debug', true);
+
+
+/*
+    for ... in // index or key in an array or object
+    for ... of // value for object or array
+*/
