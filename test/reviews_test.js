@@ -14,6 +14,7 @@ describe('Reviews: ', ()  => {
     after(() => {
         Review.deleteMany({})
         .exec((err, reviews) => {
+            if (err) throw err;
             reviews.remove();
         });
     });
