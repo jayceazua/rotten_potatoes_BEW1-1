@@ -63,7 +63,8 @@ describe('Reviews: ', ()  => {
                 Review.findOne({ title: demoReview.title }).then((review) => { // complex test
                     expect(demoReview.title).to.equal(review.title);
                     // need to find the proper way of testing redirecting
-                    console.log(`${app.mountpath}reviews/${review._id}`)
+                    expect(res.redirects[0]).to.include(review._id) // makes sure the redirect url includes the Id
+                    expect(res.req.path).to.not.equal(`${app.mountpath}`) // makes sure it redirected
                 }).catch((err) => { console.log(err) });
                 expect(res).to.redirect;
                 return done();
@@ -71,7 +72,23 @@ describe('Reviews: ', ()  => {
             .catch(err => done(err));
     });
     // SHOW
-    it('should show a SINGLE review on /reviews/<id> GET', (done) => {});
+    it('should show a SINGLE review on /reviews/<id> GET', (done) => {
+        Review.find({}).then((posts) => {
+            let reviewId = String(posts[0]._id)
+            chai.request(app)
+                .get(`/reviews/${reviewId}`)
+                .then((res) => {
+                    expect(res).to.have.status(200);
+                    expect(res).to.have.header('content-type', 'text/html; charset=utf-8');
+                    expect(res.req.path).to.include(reviewId)
+                    // test if the data is in ??
+                    return done()
+                })
+                .catch(err => done(err));
+        }).catch( (err) => {
+            console.log(err.message)
+        });
+    });
     // EDIT
     it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {});
     // UPDATE
