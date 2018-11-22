@@ -1,9 +1,5 @@
-const { ObjectID } = require('mongodb');
 const Review = require('./../../models/review');
 
-
-const reviewOneId = new ObjectID();
-const reviewTwoId = new ObjectID();
 const reviews = [{
   title: 'Is this movie even that good?',
   movieTitle: 'mid90s',

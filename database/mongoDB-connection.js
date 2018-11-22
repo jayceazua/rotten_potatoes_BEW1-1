@@ -12,6 +12,7 @@ mongoose.connection.once('open', () => {
 });
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false); // corrects the annoying DeprecationWarning
 // mongoose.set('debug', true);
 
 

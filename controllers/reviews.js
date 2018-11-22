@@ -43,7 +43,7 @@ router.get('/reviews/:id/edit', (req, res) => {
 });
 
 // UPDATE - Update a review
-router.put('/reviews/:id', (req, res) => {
+router.patch('/reviews/:id', (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body)
   .then((review) => {
     res.redirect(`/reviews/${review._id}`)

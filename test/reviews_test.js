@@ -28,8 +28,8 @@ describe('Reviews: ', ()  => {
                 expect(res).to.have.status(200);
                 // better tests coming soon
                 Review.find().then((reviews) => {
-                    expect(reviews.length).to.equal(2)
-                }).catch(err => err)
+                    expect(reviews.length).to.equal(2);
+                }).catch(err => err);
                 return done();
             })
             .catch(err => done(err));
@@ -63,8 +63,9 @@ describe('Reviews: ', ()  => {
                 Review.findOne({ title: demoReview.title }).then((review) => { // complex test
                     expect(demoReview.title).to.equal(review.title);
                     // need to find the proper way of testing redirecting
-                    expect(res.redirects[0]).to.include(review._id) // makes sure the redirect url includes the Id
-                    expect(res.req.path).to.not.equal(`${app.mountpath}`) // makes sure it redirected
+                    expect(res).to.redirect;
+                    expect(res.redirects[0]).to.include(review._id); // makes sure the redirect url includes the Id
+                    expect(res.req.path).to.not.equal(`${app.mountpath}`); // makes sure it redirected
                 }).catch((err) => { console.log(err) });
                 expect(res).to.redirect;
                 return done();
@@ -73,16 +74,17 @@ describe('Reviews: ', ()  => {
     });
     // SHOW
     it('should show a SINGLE review on /reviews/<id> GET', (done) => {
-        Review.find({}).then((posts) => {
-            let reviewId = String(posts[0]._id)
+        Review.find({}).then((data) => {
+            let reviewId = String(data[0]._id)
             chai.request(app)
                 .get(`/reviews/${reviewId}`)
                 .then((res) => {
                     expect(res).to.have.status(200);
                     expect(res).to.have.header('content-type', 'text/html; charset=utf-8');
-                    expect(res.req.path).to.include(reviewId)
+                    expect(res.req.path).to.include(reviewId);
                     // test if the data is in ??
-                    return done()
+
+                    return done();
                 })
                 .catch(err => done(err));
         }).catch( (err) => {
@@ -90,9 +92,51 @@ describe('Reviews: ', ()  => {
         });
     });
     // EDIT
-    it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {});
+    it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {
+        Review.find({}).then((data) => {
+            let reviewId = String(data[0]._id)
+            chai.request(app)
+                .get(`/reviews/${reviewId}/edit`)
+                .then((res) => {
+                    expect(res).to.have.status(200);
+                    expect(res).to.have.header('content-type', 'text/html; charset=utf-8');
+                    expect(res.req.path).to.include(`${reviewId}/edit`);
+                    return done();
+                })
+                .catch(err => done(err))
+        }).catch( (err) => {
+            console.log(err.message)
+        });
+    });
     // UPDATE
-    it('should update a SINGLE review on /reviews/<id> PATCH', (done) => {});
+    it('should update a SINGLE review on /reviews/<id> PATCH', (done) => {
+        Review.find({}).then((data) => {
+            let reviewId = String(data[0]._id)
+            chai.request(app)
+                .patch(`/reviews/${reviewId}`)
+                .send({
+                    title: 'Making sure things changed',
+                    description: 'This is to prove I did change this!',
+                })
+                .then((res) => {
+                    expect(res).to.have.status(200);
+                    // make sure the data is updated
+                    Review.findOne({title: 'Making sure things changed'}).then((review) => {
+                        expect(reviewId).to.equal(review._id); // make sure it is the same entry
+                        expect(data[0].title).to.not.equal(review.title);
+                        expect(data[0].movieTitle).to.equal(review.movieTitle);
+                    }).catch(err => err);
+                    expect(data.length).to.equal(2) // make sure it did not create a 3 entry
+                    // make sure it redirects
+                    expect(res).to.redirect;
+                    expect(res.redirects[0]).to.include(data[0]._id); // makes sure the redirect url includes the Id
+                    expect(res.req.path).to.not.equal(`${app.mountpath}`); // makes sure it redirected
+                    // console.log(res.res._events.data[0]())
+                    return done()
+                })
+                .catch(err => done(err))
+        }).catch(err => err)
+    });
     // DELETE
     it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {});
 });
