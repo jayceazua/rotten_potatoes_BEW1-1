@@ -66,7 +66,7 @@ describe('Reviews: ', ()  => {
                     expect(res).to.redirect;
                     expect(res.redirects[0]).to.include(review._id); // makes sure the redirect url includes the Id
                     expect(res.req.path).to.not.equal(`${app.mountpath}`); // makes sure it redirected
-                }).catch((err) => { console.log(err) });
+                }).catch(e => e);
                 expect(res).to.redirect;
                 return done();
             })
@@ -104,9 +104,7 @@ describe('Reviews: ', ()  => {
                     return done();
                 })
                 .catch(err => done(err))
-        }).catch( (err) => {
-            console.log(err.message)
-        });
+        }).catch(err => err);
     });
     // UPDATE
     it('should update a SINGLE review on /reviews/<id> PATCH', (done) => {
@@ -122,10 +120,10 @@ describe('Reviews: ', ()  => {
                     expect(res).to.have.status(200);
                     // make sure the data is updated
                     Review.findOne({title: 'Making sure things changed'}).then((review) => {
-                        expect(reviewId).to.equal(review._id); // make sure it is the same entry
+                        expect(data[0]._id).to.equal(review._id); // make sure it is the same entry
                         expect(data[0].title).to.not.equal(review.title);
                         expect(data[0].movieTitle).to.equal(review.movieTitle);
-                    }).catch(err => err);
+                    }).catch(e => e);
                     expect(data.length).to.equal(2) // make sure it did not create a 3 entry
                     // make sure it redirects
                     expect(res).to.redirect;
@@ -138,5 +136,20 @@ describe('Reviews: ', ()  => {
         }).catch(err => err)
     });
     // DELETE
-    it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {});
+    it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {
+        Review.find({}).then((data) => {
+            let reviewId = String(data[0]._id)
+            expect(data.length).to.equal(2);
+            chai.request(app)
+                .delete(`/reviews/${reviewId}`) // deleting the review from index [0]
+                .then((res) => {
+                    Review.find({}).then((_reviews) => {
+                        expect(_reviews.length).to.equal(1);
+                        expect(data[0]).to.not.equal(_reviews[0])
+                    }).catch(e => e)
+                    return done()
+                })
+                .catch(err => done(err))
+        }).catch(err => err)
+    });
 });
