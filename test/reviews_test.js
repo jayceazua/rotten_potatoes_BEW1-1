@@ -29,10 +29,10 @@ describe('Reviews: ', ()  => {
                 // better tests coming soon
                 Review.find().then((reviews) => {
                     expect(reviews.length).to.equal(2);
-                }).catch(err => err);
+                }).catch(e => e);
                 return done();
             })
-            .catch(err => done(err));
+            .catch(e => done(e));
     });
     // NEW
     it('should display new form on /reviews/new GET', (done) => {
@@ -44,7 +44,7 @@ describe('Reviews: ', ()  => {
                 expect(res).to.have.header('content-type', "text/html; charset=utf-8");
                 return done();
             })
-            .catch(err => done(err));
+            .catch(e => done(e));
     });
     // CREATE
     it('should create a SINGLE review on /reviews POST', (done) => {
@@ -70,7 +70,7 @@ describe('Reviews: ', ()  => {
                 expect(res).to.redirect;
                 return done();
             })
-            .catch(err => done(err));
+            .catch(e => done(e));
     });
     // SHOW
     it('should show a SINGLE review on /reviews/<id> GET', (done) => {
@@ -86,10 +86,8 @@ describe('Reviews: ', ()  => {
 
                     return done();
                 })
-                .catch(err => done(err));
-        }).catch( (err) => {
-            console.log(err.message)
-        });
+                .catch(e => done(e));
+        }).catch(e => e);
     });
     // EDIT
     it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {
@@ -103,8 +101,8 @@ describe('Reviews: ', ()  => {
                     expect(res.req.path).to.include(`${reviewId}/edit`);
                     return done();
                 })
-                .catch(err => done(err))
-        }).catch(err => err);
+                .catch(e => done(e))
+        }).catch(e => e);
     });
     // UPDATE
     it('should update a SINGLE review on /reviews/<id> PATCH', (done) => {
@@ -132,8 +130,8 @@ describe('Reviews: ', ()  => {
                     // console.log(res.res._events.data[0]())
                     return done()
                 })
-                .catch(err => done(err))
-        }).catch(err => err)
+                .catch(e => done(e));
+        }).catch(e => e);
     });
     // DELETE
     it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {
@@ -145,11 +143,11 @@ describe('Reviews: ', ()  => {
                 .then((res) => {
                     Review.find({}).then((_reviews) => {
                         expect(_reviews.length).to.equal(1);
-                        expect(data[0]).to.not.equal(_reviews[0])
-                    }).catch(e => e)
-                    return done()
+                        expect(data[0]).to.not.equal(_reviews[0]);
+                    }).catch(e => e);
+                    return done();
                 })
-                .catch(err => done(err))
-        }).catch(err => err)
+                .catch(e => done(e));
+        }).catch(e => e);
     });
 });
