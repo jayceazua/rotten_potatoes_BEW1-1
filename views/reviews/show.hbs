@@ -5,13 +5,19 @@
         <h1>{{review.title}}</h1>
         <h2>{{review.movieTitle}}</h2>
         <p>{{review.description}}</p>
-        <!-- Delete button -->
-        <p>
+
+
+        <div class='text-right'>
+            <!-- Delete button -->
             <form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
                 <button class="btn btn-danger" type="submit">Delete</button>
             </form>
-        </p>
-        <!-- Edit Button -->
-        <p><a class="btn btn-info" href="/reviews/{{review._id}}/edit">Edit</a></p>
+            <!-- Edit Button -->
+            <a class="btn btn-info" href="/reviews/{{review._id}}/edit">Edit</a>
+        </div>
+
+
+        <!-- Comment form -->
+        {{> comment-form}}
     </div>
 </div>
