@@ -23,23 +23,25 @@ describe('Reviews: ', ()  => {
 
     // INDEX
     it('should index ALL reviews on / GET', (done) => {
-        chai.request(app)
-            .get('/')
-            .then((res) => {
-                expect(res).to.have.status(200);
-                expect(res).to.have.header('content-type', "text/html; charset=utf-8");
-                // better tests coming soon
-                Review.find({}).then((_reviews) => { // confirming data is in !
-                    expect(res.text).to.include(_reviews[0]._id)
-                    expect(res.text).to.include(_reviews[0].title)
-                    expect(res.text).to.include(_reviews[1]._id)
-                    expect(res.text).to.include(_reviews[1].title)
-                }).catch(e => e)
-
-                return done();
-            })
-            .catch(e => done(e));
+        Review.find({}).then((_reviews) => { // confirming data is in !
+            chai.request(app)
+                .get('/')
+                .then((res) => {
+                    expect(res).to.have.status(200);
+                    expect(res).to.have.header('content-type', "text/html; charset=utf-8");
+                    // better tests coming soon
+                    expect(res.text).to.have.string(`${_reviews[0]._id}`);
+                    expect(res.text).to.have.string(`${_reviews[1]._id}`);
+                    expect(res.text).to.have.string(`${_reviews[1].movieTitle}`);
+                    expect(res.text).to.have.string(`${_reviews[0].movieTitle}`);
+                    expect(res.text).to.have.string(`${_reviews[0].title}`)
+                    expect(res.text).to.have.string(`${_reviews[1].title}`)
+                    return done();
+                })
+                .catch(e => done(e));
+        }).catch(e => e);
     });
+
     // NEW
     it('should display new form on /reviews/new GET', (done) => {
         chai.request(app)
