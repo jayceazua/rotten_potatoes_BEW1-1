@@ -13,10 +13,10 @@ describe('Reviews: ', ()  => {
     // Clean database of garbage data.
     after(() => {
         Review.deleteMany({})
-        .exec((err, reviews) => {
-            if (err) throw err;
-            reviews.remove();
-        });
+        .then((reviews) => {
+            reviews.remove()
+        })
+        .catch(err => err)
     });
 
     beforeEach(populateReviews) // populate seed data for reviews
