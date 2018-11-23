@@ -59,8 +59,7 @@ describe('Reviews: ', ()  => {
         const demoReview = ({
             title: 'This is a test for the sake of testing!',
             movieTitle: 'Don\'t watch!',
-            description: 'Well this movie sucked ass...',
-            rating: 0
+            description: 'Well this movie sucked ass...'
         });
         chai.request(app)
             .post('/reviews')

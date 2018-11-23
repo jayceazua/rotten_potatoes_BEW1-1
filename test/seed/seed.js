@@ -3,13 +3,11 @@ const Review = require('./../../models/review');
 const reviews = [{
   title: 'Is this movie even that good?',
   movieTitle: 'mid90s',
-  description: 'I want to watch this movie.',
-  rating: 3
+  description: 'I want to watch this movie.'
 }, {
   title: 'Another one?',
   movieTitle: 'Harry Potter',
-  description: 'ehhh...',
-  rating: 6
+  description: 'ehhh...'
 }];
 
 const populateReviews = (done) => {

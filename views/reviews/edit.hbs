@@ -1,11 +1,18 @@
 <!-- views/reviews-edit.handlebars -->
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <form method="POST" action="/reviews/{{review._id}}?_method=PATCH">
+            {{> reviews-form}}
+            <div>
+                <!-- Close button to go back  -->
+                <a href="/">Close</a>
+                <!-- Submit the form input -->
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Save Review</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="POST" action="/reviews/{{review._id}}?_method=PUT">
-  {{> reviews-form}}
-  <div>
-    <!-- Close button to go back  -->
-    <a href="/">Close</a>
-    <!-- Submit the form input -->
-    <button type="submit">Save Review</button>
-  </div>
-</form>
+<!-- views/reviews-edit.handlebars -->
