@@ -110,6 +110,10 @@ describe('Reviews: ', ()  => {
                     expect(res).to.have.status(200);
                     expect(res).to.have.header('content-type', 'text/html; charset=utf-8');
                     expect(res.req.path).to.include(`${reviewId}/edit`);
+                    expect(res.text).to.have.string(`${data[0].title}`)
+                    expect(res.text).to.have.string(`${data[0].movieTitle}`)
+                    expect(res.text).to.have.string(`${data[0]._id}`)
+                    expect(res.text).to.have.string(`${data[0].description}`)
                     return done();
                 })
                 .catch(e => done(e))
