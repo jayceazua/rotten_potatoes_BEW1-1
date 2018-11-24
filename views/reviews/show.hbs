@@ -19,5 +19,10 @@
 
         <!-- Comment form -->
         {{> comments-form}}
+        <hr>
+        <!-- Show Comments -->
+        {{#each comments}}
+            {{> comment}}
+        {{/each}}
     </div>
 </div>

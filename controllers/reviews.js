@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Review = require('../models/review');
+const Comment = require('../models/comment');
 
 // INDEX - See all reviews
 router.get('/', (req, res) => {
@@ -29,7 +30,9 @@ router.post('/reviews', (req, res) => {
 // SHOW - See one review
 router.get('/reviews/:id', (req, res) => {
   Review.findById(req.params.id).then((review) => {
-    res.render('reviews/show', {review})
+      Comment.find({reviewId: req.params.id}).then((comments) => {
+        res.render('reviews/show', {review, comments})
+      })
   }).catch((err) => {
     res.send(err.message)
   });
