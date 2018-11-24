@@ -2,11 +2,11 @@
 const commentsRouter = require('express').Router();
 const Comment = require('../models/comment');
 
-// CREATE 
+// CREATE
 commentsRouter.post('/reviews/comments', (req, res) => {
     Comment.create(req.body)
     .then((comment) => {
-        res.redirect(`reviews/${commment.reviewId}`)
+        res.redirect(`reviews/${comment.reviewId}`)
     })
     .catch(e => e)
 });

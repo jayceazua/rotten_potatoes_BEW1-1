@@ -11,7 +11,7 @@ const CommentSchema = new Schema({
         required: true
     },
     reviewId: {
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,
         ref: 'Review' }
 });
 

@@ -5,6 +5,7 @@ const { reviews, populateReviews } = require('./seed/seed');
 const expect = chai.expect;
 // calling in my model schema for reviews
 const Review = require('../models/review');
+const Comment = require('../models/comment');
 chai.use(chaiHttp);
 
 
@@ -163,5 +164,37 @@ describe('Reviews: ', ()  => {
                 })
                 .catch(e => done(e));
         }).catch(e => e);
+    });
+
+
+    describe('Comments:', () => {
+        // Clean database of garbage data.
+        after(() => {
+            Comment.deleteMany({})
+            .then((comments) => {
+                comments.remove()
+            })
+            .catch(e => e)
+        });
+        // CREATE
+        it('should create a SINGLE comment on /reviews/comments POST', (done) => {
+            Review.find({}).then((_reviews) => {
+                console.log(_reviews[0]._id)
+                const demoComment = {
+                    title: 'Demo Comment Title',
+                    content: 'This is a sample demo comment description.',
+                    reviewId: String(_reviews[0]._id)
+                }
+                chai.request(app)
+                    .post('/reviews/comments')
+                    .send(demoComment)
+                    .then((res) => {
+                        expect(res).to.have.status(200)
+                        return done();
+                    })
+                    .catch(e => done(e))
+            }).catch(e => e)
+        });
+        // SHOW
     });
 });
