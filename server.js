@@ -39,8 +39,10 @@ app.use(methodOverride((req, res) => {
 // ROUTES - Reviews
 const reviews = require('./controllers/reviews');
 const comments = require('./controllers/comments');
+const movies = require('./controllers/movies')
 app.use(reviews);
 app.use(comments);
+app.use(movies)
 
 
 app.listen(port, () => {
