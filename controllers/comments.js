@@ -2,8 +2,13 @@
 const commentsRouter = require('express').Router();
 const Comment = require('../models/comment');
 
+// CREATE 
 commentsRouter.post('/reviews/comments', (req, res) => {
-    res.send('Posted Successfully!');
+    Comment.create(req.body)
+    .then((comment) => {
+        res.redirect(`reviews/${commment.reviewId}`)
+    })
+    .catch(e => e)
 });
 
 module.exports = commentsRouter
