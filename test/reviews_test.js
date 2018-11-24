@@ -156,10 +156,12 @@ describe('Reviews: ', ()  => {
             chai.request(app)
                 .delete(`/reviews/${reviewId}`) // deleting the review from index [0]
                 .then((res) => {
+                    expect(res).to.have.status(200)
                     Review.find({}).then((_reviews) => {
                         expect(_reviews.length).to.equal(1);
                         expect(data[0]).to.not.equal(_reviews[0]);
                     }).catch(e => e);
+                    expect(res).to.redirect;
                     return done();
                 })
                 .catch(e => done(e));
@@ -202,6 +204,20 @@ describe('Reviews: ', ()  => {
                     .catch(e => done(e))
             }).catch(e => e)
         });
-        // SHOW
+        // DELETE
+        it('should delete a SINGLE comment on /reviews/comments/<id> DELETE', (done) => {
+            Comment.find({}).then((comments) => {
+                const commentId = String(comments[0]._id);
+                expect(comments.length).to.equal(1)
+                chai.request(app)
+                    .delete(`/reviews/comments/${commentId}`)
+                    .then((res) => {
+                        expect(res).to.have.status(200);
+                        expect(res).to.redirect;
+                        return done()
+                    })
+                    .catch(e => done(e));
+            }).catch(e => e);
+        })
     });
 });

@@ -11,4 +11,12 @@ commentsRouter.post('/reviews/comments', (req, res) => {
     .catch(e => e)
 });
 
+commentsRouter.delete('/reviews/comments/:id', (req, res) => {
+    Comment.findByIdAndRemove(req.params.id)
+        .then((comment) => {
+            res.redirect(`/reviews/${comment.reviewId}`);
+        })
+        .catch(e => e)
+});
+
 module.exports = commentsRouter

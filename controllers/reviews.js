@@ -60,7 +60,7 @@ router.patch('/reviews/:id', (req, res) => {
 // DELETE - Delete a review
 router.delete('/reviews/:id', (req, res) => {
   Review.findByIdAndRemove(req.params.id)
-  .then((review) => {
+  .then(() => {
     res.redirect('/');
   }).catch((err) => {
     res.send(err.message)
