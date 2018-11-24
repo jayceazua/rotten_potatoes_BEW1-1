@@ -179,7 +179,6 @@ describe('Reviews: ', ()  => {
         // CREATE
         it('should create a SINGLE comment on /reviews/comments POST', (done) => {
             Review.find({}).then((_reviews) => {
-                console.log(_reviews[0]._id)
                 const demoComment = {
                     title: 'Demo Comment Title',
                     content: 'This is a sample demo comment description.',
@@ -189,7 +188,15 @@ describe('Reviews: ', ()  => {
                     .post('/reviews/comments')
                     .send(demoComment)
                     .then((res) => {
-                        expect(res).to.have.status(200)
+                        expect(res).to.have.status(200);
+                        Comment.find({reviewId: String(_reviews[0]._id)}).then((comments) => {
+                            expect(comments.length).to.equal(1)
+                            expect(comments[0].title).to.equal(demoComment.title)
+                            expect(comments[0].title).to.equal(demoComment.content)
+                            expect(comments[0].reviewId).to.equal(demoComment.reviewId)
+                        }).catch(e => e)
+                        expect(res.redirects[0]).to.include(_reviews[0]._id); // makes sure the redirect url includes the Id
+                        expect(res.req.path).to.not.equal(`${app.mountpath}`);
                         return done();
                     })
                     .catch(e => done(e))
