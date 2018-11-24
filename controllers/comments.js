@@ -6,7 +6,7 @@ const Comment = require('../models/comment');
 commentsRouter.post('/reviews/comments', (req, res) => {
     Comment.create(req.body)
     .then((comment) => {
-        res.redirect(`reviews/${comment.reviewId}`)
+        res.redirect(`/reviews/${comment.reviewId}`)
     })
     .catch(e => e)
 });
