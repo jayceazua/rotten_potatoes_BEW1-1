@@ -6,10 +6,12 @@ const Comment = require('../models/comment');
 commentsRouter.post('/reviews/comments', (req, res) => {
     Comment.create(req.body)
     .then((comment) => {
-        res.redirect(`/reviews/${comment.reviewId}`)
+        res.status(200).send({ comment });
     })
-    .catch(e => e)
+    .catch(e => res.send(e.message))
 });
+
+
 
 commentsRouter.delete('/reviews/comments/:id', (req, res) => {
     Comment.findByIdAndRemove(req.params.id)

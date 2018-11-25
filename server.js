@@ -40,9 +40,11 @@ app.use(methodOverride((req, res) => {
 const reviews = require('./controllers/reviews');
 const comments = require('./controllers/comments');
 const movies = require('./controllers/movies')
+const admin = require('./controllers/admin')
 app.use(reviews);
 app.use(comments);
 app.use(movies)
+app.use(admin)
 
 
 app.listen(port, () => {

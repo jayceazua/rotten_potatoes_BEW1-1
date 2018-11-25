@@ -15,14 +15,13 @@
             <!-- Edit Button -->
             <a class="btn btn-info" href="/movies/{{review.movieId}}/reviews/{{review._id}}/edit">Edit</a>
         </div>
-
-
-        <!-- Comment form -->
-        {{> comments-form}}
         <hr>
+        {{> comment-form}}
         <!-- Show Comments -->
-        {{#each comments}}
+        <div id="comments">
+          {{#each comments}}
             {{> comment}}
-        {{/each}}
+          {{/each}}
+        </div>
     </div>
 </div>
