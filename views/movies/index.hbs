@@ -1,6 +1,6 @@
 <h1>Now Playing</h1>
 {{#each movies}}
-    <li>{{this.title}}</li>
-    <li>{{this.genre_ids}}</li>
-    <li><a href="/movies/{{this.id}}"><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" /></a></li>
+    <div>{{this.title}}</div>
+    <div>{{this.genre_ids}}</div>
+    <div><a href="/movies/{{this.id}}"><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" /></a></div>
 {{/each}}

@@ -1,42 +1,44 @@
 <!-- views/reviews-new.handlebars -->
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-<form method="POST" action="/reviews">
-  <!-- put into a partial -->
-  <fieldset>
-    <legend>New Review</legend>
-    <!-- TITLE -->
-    <div class="form-group">
-      <label for="review-title">Title</label><br>
-      <input class="form-control" id="review-title" type="text" name="title"/>
+    <div class="col-sm-6 col-sm-offset-3">
+        <form method="POST" action="/movies/{{movie.id}}/reviews">
+            <!-- put into a partial -->
+            <fieldset>
+                <legend>New Review</legend>
+                <!-- TITLE -->
+                <div class="form-group">
+                    <label for="review-title">Title</label><br>
+                    <input class="form-control" id="review-title" type="text" name="title" />
+                </div>
+
+
+                <!-- MOVIE TITLE -->
+                <div class="form-group">
+                    <label for="movie-title">Movie Title</label><br>
+                    <input class="form-control" id="movie-title" type="text" name="movieTitle" value="{{movie.title}}" />
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label for="review-description">Description</label><br>
+                    <textarea class="form-control" id="review-description" name="description" rows="10" /></textarea>
+                </div>
+
+                <input type="hidden" name="movieId" value="{{movie.id}}">
+
+            </fieldset>
+
+
+
+            <div class='text-right'>
+                <!-- Close button to go back  -->
+                <a href="/movies/{{movie.id}}">Close</a>
+                <!-- Submit the form input -->
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Save Review</button>
+                </div>
+            </div>
+
+        </form>
     </div>
-
-
-    <!-- MOVIE TITLE -->
-    <div class="form-group">
-      <label for="movie-title">Movie Title</label><br>
-      <input class="form-control" id="movie-title" type="text" name="movieTitle"/>
-    </div>
-
-    <!-- DESCRIPTION -->
-    <div class="form-group">
-      <label for="review-description">Description</label><br>
-      <textarea class="form-control" id="review-description" name="description" rows="10" /></textarea>
-    </div>
-
-  </fieldset>
-
-
-
-  <div class='text-right'>
-    <!-- Close button to go back  -->
-    <a href="/">Close</a>
-    <!-- Submit the form input -->
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Save Review</button>
-    </div>
-  </div>
-
-</form>
-</div>
 </div>

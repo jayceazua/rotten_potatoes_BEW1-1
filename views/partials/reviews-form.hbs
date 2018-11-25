@@ -10,7 +10,7 @@
   <!-- MOVIE TITLE -->
   <div class="form-group">
     <label for="movie-title">Movie Title</label><br>
-    <input class="form-control" id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}" />
+    <input class="form-control" id="movie-title" type="text" name="movieTitle" value="{{movie.title}}" />
   </div>
 
   <!-- DESCRIPTION -->
@@ -18,4 +18,5 @@
     <label for="review-description">Description</label><br>
     <textarea class="form-control" id="review-description" name="description" rows="10" />{{review.description}}</textarea>
   </div>
+  <input type="hidden" name="movieId" value="{{movie.id}}">
 </fieldset>

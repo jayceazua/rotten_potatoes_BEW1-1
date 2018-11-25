@@ -14,6 +14,10 @@ const ReviewSchema = new Schema ({
   description: {
       type: String,
       required: true
+  },
+  movieId: {
+      type: String,
+      required: true
   }
 });
 

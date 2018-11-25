@@ -1,5 +1,5 @@
 <!-- views/reviews-show.handlebars -->
-<a href="/">Back to Home</a>
+<a href="/movies">Back to Home</a>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <h1>{{review.title}}</h1>
@@ -9,11 +9,11 @@
 
         <div class='text-right'>
             <!-- Delete button -->
-            <form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
+            <form method="POST" action="/movies/{{review.movieId}}/reviews/{{review._id}}?_method=DELETE">
                 <button class="btn btn-danger" type="submit">Delete</button>
             </form>
             <!-- Edit Button -->
-            <a class="btn btn-info" href="/reviews/{{review._id}}/edit">Edit</a>
+            <a class="btn btn-info" href="/movies/{{review.movieId}}/reviews/{{review._id}}/edit">Edit</a>
         </div>
 
 
