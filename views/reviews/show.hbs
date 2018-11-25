@@ -1,11 +1,10 @@
 <!-- views/reviews-show.handlebars -->
-<a href="/movies">Back to Home</a>
+<a href="/">Back to Home</a>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <h1>{{review.title}}</h1>
         <h2>{{review.movieTitle}}</h2>
         <p>{{review.description}}</p>
-
 
         <div class='text-right'>
             <!-- Delete button -->
@@ -15,13 +14,14 @@
             <!-- Edit Button -->
             <a class="btn btn-info" href="/movies/{{review.movieId}}/reviews/{{review._id}}/edit">Edit</a>
         </div>
+
+
+        <!-- Comment form -->
+        {{> comments-form}}
         <hr>
-        {{> comment-form}}
         <!-- Show Comments -->
-        <div id="comments">
-          {{#each comments}}
+        {{#each comments}}
             {{> comment}}
-          {{/each}}
-        </div>
+        {{/each}}
     </div>
 </div>

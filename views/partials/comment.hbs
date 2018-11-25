@@ -1,11 +1,14 @@
 <!-- views/partials/comment.handlebars -->
-
 <div class="card">
-  <div class="card-block">
-    <h4 class="card-title">{{this.title}}</h4>
-    <p class="card-text">{{this.content}}</p>
-    <div><form method="POST" action="/reviews/comments/{{this._id}}?_method=DELETE">
-        <button class="btn btn-link" type="submit">Delete</button>
-    </form></div>
-  </div>
+    <div class="card-block">
+        <h4 class="card-title">{{this.title}}</h4>
+        <p class="card-text">{{this.content}}</p>
+        <p>Hopefully this works: {{review.movieId}}</p>
+
+        <div>
+            <form method="POST" action="/reviews/comments/{{this._id}}?_method=DELETE">
+                <button class="btn btn-link" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
 </div>

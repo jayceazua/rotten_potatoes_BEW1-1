@@ -7,5 +7,6 @@
 5. Users can edit a review (edit/update)
 6. Users can comment on reviews (comments#create)
 7. Users can delete comments (comments#destroy)
+8. Client-Side Architecture
 
 https://rotten-potatoes-jayceazua.herokuapp.com/

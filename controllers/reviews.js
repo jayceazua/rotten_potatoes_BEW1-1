@@ -18,7 +18,6 @@ router.get('/movies/:movieId/reviews/new', (req, res) => {
 
 // CREATE - Create a new review
 router.post('/movies/:movieId/reviews', (req, res) => {
-    console.log('This is the CREATE for reviews', req.params)
   Review.create(req.body).then((review) => {
     res.redirect(`/movies/${req.params.movieId}`) // Redirect to reviews/:id
   }).catch((err) => {
